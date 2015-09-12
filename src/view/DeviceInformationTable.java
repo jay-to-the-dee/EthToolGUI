@@ -19,7 +19,7 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 import model.InterfaceHandle;
-import model.property.Property;
+import model.property.*;
 
 /**
  * Main table that provides the information from the InterfaceHandle
@@ -41,15 +41,32 @@ public class DeviceInformationTable extends JPanel
             {
                 JCheckBox newPropertyValueCheckBox;
                 newPropertyValueCheckBox = new JCheckBox();
-                newPropertyValueCheckBox.setSelected((boolean)property.getValue());
+                newPropertyValueCheckBox.setSelected((Boolean) property.getValue());
                 newPropertyValueCheckBox.setEnabled(!property.isReadOnly());
+
                 this.add(newPropertyValueCheckBox);
+            }
+            else if (property.getValue() instanceof Integer)
+            {
+                JSpinner newPropertyValueSpinner;
+                IntegerProperty integerProperty = (IntegerProperty) property;
+
+                SpinnerModel sm = new SpinnerNumberModel(
+                        (int) integerProperty.getValue(), 
+                        integerProperty.getMinIntValue(), 
+                        integerProperty.getMaxIntValue(), 
+                        1);
+                newPropertyValueSpinner = new JSpinner(sm);
+
+                newPropertyValueSpinner.setEnabled(!property.isReadOnly());
+                this.add(newPropertyValueSpinner);
             }
             else
             {
                 JTextField newPropertyValueTextField;
-                newPropertyValueTextField = new JTextField((String)property.getValue());
+                newPropertyValueTextField = new JTextField((String) property.getValue());
                 newPropertyValueTextField.setEditable(!property.isReadOnly());
+
                 this.add(newPropertyValueTextField);
             }
 

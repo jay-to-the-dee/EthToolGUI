@@ -119,6 +119,18 @@ public class Parser
                     }
                 }
 
+                else if (line.startsWith("\tPHYAD:"))
+                {
+                    try
+                    {
+                        interfaceHandle.addNewProperty(new PHYAD(ExtractUnsignedIntegerValue(line)));
+                    }
+                    catch (Exception ex)
+                    {
+                        //Do nothing and passively accept
+                    }
+                }
+
                 else if (line.startsWith("\tLink detected:"))
                 {
                     try
@@ -170,4 +182,9 @@ public class Parser
         }
     }
 
+    private Integer ExtractUnsignedIntegerValue(String value) throws ParseFailureException
+    {
+        value = ExtractEndOfStringAfterColons(value);
+        return Integer.valueOf(value);
+    }
 }

@@ -19,6 +19,7 @@ package controller;
 import model.property.*;
 import java.io.*;
 import model.InterfaceHandle;
+import model.property.IntegerProperty.ValueOutOfBoundsException;
 
 /**
  *
@@ -51,7 +52,7 @@ public class Parser
                 {
                     try
                     {
-                        interfaceHandle.addNewProperty(new SupportedPauseFrameUse(YesNoToBoolean(line)));
+                        interfaceHandle.addNewProperty(new SupportedPauseFrameUse(ExtractEndOfStringAfterColons(line)));
                     }
                     catch (ParseFailureException ex)
                     {
@@ -63,7 +64,7 @@ public class Parser
                 {
                     try
                     {
-                        interfaceHandle.addNewProperty(new SupportsAutoNegotiation(YesNoToBoolean(line)));
+                        interfaceHandle.addNewProperty(new SupportsAutoNegotiation(StringToBoolean(line)));
                     }
                     catch (ParseFailureException ex)
                     {
@@ -75,7 +76,7 @@ public class Parser
                 {
                     try
                     {
-                        interfaceHandle.addNewProperty(new AdvertisedAutoNegotiation(YesNoToBoolean(line)));
+                        interfaceHandle.addNewProperty(new AdvertisedAutoNegotiation(StringToBoolean(line)));
                     }
                     catch (ParseFailureException ex)
                     {
@@ -125,7 +126,43 @@ public class Parser
                     {
                         interfaceHandle.addNewProperty(new PHYAD(ExtractUnsignedIntegerValue(line)));
                     }
-                    catch (Exception ex)
+                    catch (ParseFailureException | ValueOutOfBoundsException ex)
+                    {
+                        //Do nothing and passively accept
+                    }
+                }
+
+                else if (line.startsWith("\tAuto-negotiation:"))
+                {
+                    try
+                    {
+                        interfaceHandle.addNewProperty(new AutoNegotiation(StringToBoolean(line)));
+                    }
+                    catch (ParseFailureException ex)
+                    {
+                        //Do nothing and passively accept
+                    }
+                }
+
+                else if (line.startsWith("\tMDI-X:"))
+                {
+                    try
+                    {
+                        interfaceHandle.addNewProperty(new MDI_X(ExtractEndOfStringAfterColons(line)));
+                    }
+                    catch (ParseFailureException ex)
+                    {
+                        //Do nothing and passively accept
+                    }
+                }
+
+                else if (line.startsWith("\tCurrent message level:"))
+                {
+                    try
+                    {
+                        interfaceHandle.addNewProperty(new CurrentMessageLevel(ExtractEndOfStringAfterColons(line)));
+                    }
+                    catch (ParseFailureException ex)
                     {
                         //Do nothing and passively accept
                     }
@@ -135,7 +172,7 @@ public class Parser
                 {
                     try
                     {
-                        interfaceHandle.addNewProperty(new LinkDetected(YesNoToBoolean(line)));
+                        interfaceHandle.addNewProperty(new LinkDetected(StringToBoolean(line)));
                     }
                     catch (ParseFailureException ex)
                     {
@@ -151,40 +188,48 @@ public class Parser
         }
     }
 
-    private boolean YesNoToBoolean(String value) throws ParseFailureException
+    private boolean StringToBoolean(String line) throws ParseFailureException
     {
-        String valueToLower = value.toLowerCase();
-        if (valueToLower.endsWith("yes"))
+        String valueToLower = line.toLowerCase();
+        if (valueToLower.endsWith("yes") || valueToLower.endsWith("on"))
         {
             return true;
         }
-        else if (valueToLower.endsWith("no"))
+        else if (valueToLower.endsWith("no") || valueToLower.endsWith("off"))
         {
             return false;
         }
         else
         {
-            throw new ParseFailureException(value);
+            throw new ParseFailureException(line);
         }
     }
 
-    private String ExtractEndOfStringAfterColons(String value) throws ParseFailureException
+    private String ExtractEndOfStringAfterColons(String line) throws ParseFailureException
     {
         try
         {
-            int valueStartsAt = value.lastIndexOf(": ") + 2;
-            int valueEndsAt = value.length();
-            return value.substring(valueStartsAt, valueEndsAt);
+            int valueStartsAt = line.lastIndexOf(": ") + 2;
+            int valueEndsAt = line.length();
+            return line.substring(valueStartsAt, valueEndsAt);
         }
         catch (Exception ex) //Just in case we get any NullPointerExceptions or anything
         {
-            throw new ParseFailureException(value);
+            throw new ParseFailureException(line);
         }
     }
 
-    private Integer ExtractUnsignedIntegerValue(String value) throws ParseFailureException
+    private Integer ExtractUnsignedIntegerValue(String line) throws ParseFailureException
     {
-        value = ExtractEndOfStringAfterColons(value);
-        return Integer.valueOf(value);
+        try
+        {
+            String extractedString = ExtractEndOfStringAfterColons(line);
+            Integer integer = Integer.valueOf(extractedString);
+            return integer;
+        }
+        catch (NumberFormatException ex)
+        {
+            throw new ParseFailureException(line);
+        }
     }
 }

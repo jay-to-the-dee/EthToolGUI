@@ -38,7 +38,7 @@ public class MainGUI extends JFrame
     {
         this.setTitle("EthTool GUI");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(600, 400));
+        this.setMinimumSize(new Dimension(450, 200));
 
         panel = this.getContentPane();
         panel.setLayout(new BorderLayout());
@@ -51,6 +51,7 @@ public class MainGUI extends JFrame
         panel.add(deviceInformation, BorderLayout.CENTER);
 
         this.setContentPane(panel);
+        this.pack();
         this.setVisible(true);
     }
 }

@@ -20,17 +20,11 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class LinkDetected extends Property
+public class LinkDetected extends BooleanProperty
 {
     public LinkDetected(Boolean value)
     {
         super("Link Detected", true);
         this.value = value;
-    }
-
-    @Override
-    public Boolean getValue()
-    {
-        return (Boolean)value;
     }
 }

@@ -20,11 +20,16 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportedPauseFrameUse extends BooleanProperty
+public abstract class BooleanProperty extends Property
 {
-    public SupportedPauseFrameUse(Boolean value)
+    public BooleanProperty(String propertyName, boolean readOnly)
     {
-        super("Supported pause frame use", true);
-        this.value = value;
+        super(propertyName, readOnly);
+    }
+
+    @Override
+    public Boolean getValue()
+    {
+        return (Boolean) value;
     }
 }

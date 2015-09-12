@@ -20,17 +20,11 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportsAutoNegotiation extends Property
+public class SupportsAutoNegotiation extends BooleanProperty
 {
     public SupportsAutoNegotiation(Boolean value)
     {
         super("Supports auto-negotiation", true);
         this.value = value;
-    }
-
-    @Override
-    public Boolean getValue()
-    {
-        return (Boolean)value;
     }
 }

@@ -20,11 +20,13 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportedPauseFrameUse extends BooleanProperty
+public class PHYAD extends IntegerProperty
 {
-    public SupportedPauseFrameUse(Boolean value)
+    public PHYAD(Integer value) throws ValueOutOfBoundsException
     {
-        super("Supported pause frame use", true);
-        this.value = value;
+        super("PHYAD", false);
+        this.maxIntValue = 255; //Max value is 256 as this is a __u8 in C
+        this.minIntValue = 0;
+        this.setIntValue(value);
     }
 }

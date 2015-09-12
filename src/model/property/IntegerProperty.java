@@ -20,11 +20,39 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportedPauseFrameUse extends BooleanProperty
+public abstract class IntegerProperty extends Property
 {
-    public SupportedPauseFrameUse(Boolean value)
+    public int maxIntValue;
+    public int minIntValue;
+
+    public IntegerProperty(String propertyName, boolean readOnly)
     {
-        super("Supported pause frame use", true);
-        this.value = value;
+        super(propertyName, readOnly);
+    }
+
+    @Override
+    public Integer getValue()
+    {
+        return (Integer) value;
+    }
+
+    protected void setIntValue(Integer value) throws ValueOutOfBoundsException
+    {
+        if (value < minIntValue || value > maxIntValue)
+        {
+            throw new ValueOutOfBoundsException(value);
+        }
+        else
+        {
+            this.value = value;
+        }
+    }
+
+    protected class ValueOutOfBoundsException extends Exception
+    {
+        public ValueOutOfBoundsException(Integer value)
+        {
+            System.err.println(getPropertyName() + " was set to out of bounds value: " + value);
+        }
     }
 }

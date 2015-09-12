@@ -22,8 +22,8 @@ package model.property;
  */
 public abstract class IntegerProperty extends Property
 {
-    public int maxIntValue;
-    public int minIntValue;
+    int maxIntValue;
+    int minIntValue;
 
     public IntegerProperty(String propertyName, boolean readOnly)
     {
@@ -34,6 +34,16 @@ public abstract class IntegerProperty extends Property
     public Integer getValue()
     {
         return (Integer) value;
+    }
+
+    public int getMaxIntValue()
+    {
+        return maxIntValue;
+    }
+
+    public int getMinIntValue()
+    {
+        return minIntValue;
     }
 
     protected void setIntValue(Integer value) throws ValueOutOfBoundsException
@@ -48,7 +58,7 @@ public abstract class IntegerProperty extends Property
         }
     }
 
-    protected class ValueOutOfBoundsException extends Exception
+    class ValueOutOfBoundsException extends Exception
     {
         public ValueOutOfBoundsException(Integer value)
         {

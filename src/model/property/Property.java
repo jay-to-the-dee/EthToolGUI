@@ -24,7 +24,7 @@ public abstract class Property
 {
     private final String propertyName;
     private final boolean readOnly;
-    protected Object value;
+    Object value;
 
     public Property(String propertyName, boolean readOnly)
     {

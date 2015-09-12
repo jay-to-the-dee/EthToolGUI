@@ -16,8 +16,8 @@
  */
 package view;
 
+import java.awt.*;
 import javax.swing.*;
-import javax.swing.table.*;
 import model.InterfaceHandle;
 import model.property.Property;
 
@@ -26,36 +26,34 @@ import model.property.Property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class DeviceInformationTable extends JTable
+public class DeviceInformationTable extends JPanel
 {
     public DeviceInformationTable(InterfaceHandle interfaceDevice)
     {
-        DeviceInformationTableModel dataModel = new DeviceInformationTableModel();
-        this.setModel(dataModel);
+
+        this.setLayout(new GridLayout(0, 2));
 
         for (Property property : interfaceDevice.getProperties())
         {
+            this.add(new JLabel(property.getPropertyName()));
 
-            dataModel.addRow(new Object[]
+            if (property.getValue() instanceof Boolean)
             {
-                property.getPropertyName(), property.getValue()
-            });
+                JCheckBox newPropertyValueCheckBox;
+                newPropertyValueCheckBox = new JCheckBox();
+                newPropertyValueCheckBox.setSelected((boolean)property.getValue());
+                newPropertyValueCheckBox.setEnabled(!property.isReadOnly());
+                this.add(newPropertyValueCheckBox);
+            }
+            else
+            {
+                JTextField newPropertyValueTextField;
+                newPropertyValueTextField = new JTextField((String)property.getValue());
+                newPropertyValueTextField.setEditable(!property.isReadOnly());
+                this.add(newPropertyValueTextField);
+            }
 
         }
     }
 
-    private class DeviceInformationTableModel extends DefaultTableModel
-    {
-
-        public DeviceInformationTableModel()
-        {
-            super(new String[]
-            {
-                "Property", "Value"
-            }, 0);
-        }
-
-        
-
-    }
 }

@@ -20,17 +20,11 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Speed extends Property
+public class Speed extends SingleEnumProperty
 {
     public Speed(String value)
     {
         super("Speed", true);
         this.value = value;
-    }
-
-    @Override
-    public String getValue()
-    {
-        return (String)value;
     }
 }

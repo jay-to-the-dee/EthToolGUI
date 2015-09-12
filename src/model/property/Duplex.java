@@ -20,17 +20,12 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Duplex extends Property
+public class Duplex extends SingleEnumProperty
 {
     public Duplex(String value)
     {
+        //Half, Full, Unknown! (%i)
         super("Duplex", true);
         this.value = value;
-    }
-
-    @Override
-    public String getValue()
-    {
-        return (String)value;
     }
 }

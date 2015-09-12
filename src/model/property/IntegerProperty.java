@@ -58,7 +58,7 @@ public abstract class IntegerProperty extends Property
         }
     }
 
-    class ValueOutOfBoundsException extends Exception
+    public class ValueOutOfBoundsException extends Exception
     {
         public ValueOutOfBoundsException(Integer value)
         {

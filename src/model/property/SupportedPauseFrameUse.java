@@ -20,9 +20,10 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportedPauseFrameUse extends BooleanProperty
+public class SupportedPauseFrameUse extends SingleEnumProperty
 {
-    public SupportedPauseFrameUse(Boolean value)
+    //Can be Symmetric, Receive-only, Transmit-only or No
+    public SupportedPauseFrameUse(String value)
     {
         super("Supported pause frame use", true);
         this.value = value;

@@ -20,17 +20,12 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Port extends Property
+public class Port extends SingleEnumProperty
 {
     public Port(String value)
     {
+        //Twisted Pair, AUI, BNC, MII, FIBRE, Direct Attach Copper, None, Other, Unknown! (%i)
         super("Port", true);
         this.value = value;
-    }
-
-    @Override
-    public String getValue()
-    {
-        return (String)value;
     }
 }

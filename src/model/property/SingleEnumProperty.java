@@ -20,13 +20,16 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class PHYAD extends IntegerProperty
+public abstract class SingleEnumProperty extends Property
 {
-    public PHYAD(Integer value) throws ValueOutOfBoundsException
+    public SingleEnumProperty(String propertyName, boolean readOnly)
     {
-        super("PHYAD", false);
-        this.maxIntValue = (1 << 8) - 1; //Max value is 256 as this is a __u8 in C
-        this.minIntValue = 0;
-        this.setIntValue(value);
+        super(propertyName, readOnly);
+    }
+
+    @Override
+    public String getValue()
+    {
+        return (String) value;
     }
 }

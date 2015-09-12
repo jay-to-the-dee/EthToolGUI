@@ -20,13 +20,12 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class PHYAD extends IntegerProperty
+public class AutoNegotiation extends BooleanProperty
 {
-    public PHYAD(Integer value) throws ValueOutOfBoundsException
+    public AutoNegotiation(Boolean value)
     {
-        super("PHYAD", false);
-        this.maxIntValue = (1 << 8) - 1; //Max value is 256 as this is a __u8 in C
-        this.minIntValue = 0;
-        this.setIntValue(value);
+        //on, off
+        super("Auto-negotiation", true);
+        this.value = value;
     }
 }

@@ -20,13 +20,12 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class PHYAD extends IntegerProperty
+public class MDI_X extends SingleEnumProperty
 {
-    public PHYAD(Integer value) throws ValueOutOfBoundsException
+    public MDI_X(String value)
     {
-        super("PHYAD", false);
-        this.maxIntValue = (1 << 8) - 1; //Max value is 256 as this is a __u8 in C
-        this.minIntValue = 0;
-        this.setIntValue(value);
+        //off, on, Unknown ? (auto)
+        super("MDI-X", true);
+        this.value = value;
     }
 }

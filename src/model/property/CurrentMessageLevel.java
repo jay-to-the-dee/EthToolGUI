@@ -20,13 +20,42 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class PHYAD extends IntegerProperty
+
+/*
+ #ifndef HAVE_NETIF_MSG
+ enum {
+ NETIF_MSG_DRV		= 0x0001,
+ NETIF_MSG_PROBE		= 0x0002,
+ NETIF_MSG_LINK		= 0x0004,
+ NETIF_MSG_TIMER		= 0x0008,
+ NETIF_MSG_IFDOWN	= 0x0010,
+ NETIF_MSG_IFUP		= 0x0020,
+ NETIF_MSG_RX_ERR	= 0x0040,
+ NETIF_MSG_TX_ERR	= 0x0080,
+ NETIF_MSG_TX_QUEUED	= 0x0100,
+ NETIF_MSG_INTR		= 0x0200,
+ NETIF_MSG_TX_DONE	= 0x0400,
+ NETIF_MSG_RX_STATUS	= 0x0800,
+ NETIF_MSG_PKTDATA	= 0x1000,
+ NETIF_MSG_HW		= 0x2000,
+ NETIF_MSG_WOL		= 0x4000,
+ };
+ #endif
+
+ //this.maxIntValue = (1 << 32) - 1; //Max value is 4,294,967,296 as this is a __u32 in C
+
+ */
+public class CurrentMessageLevel extends Property
 {
-    public PHYAD(Integer value) throws ValueOutOfBoundsException
+    public CurrentMessageLevel(String value)
     {
-        super("PHYAD", false);
-        this.maxIntValue = (1 << 8) - 1; //Max value is 256 as this is a __u8 in C
-        this.minIntValue = 0;
-        this.setIntValue(value);
+        super("Current message level", false);
+        this.value = value;
+    }
+
+    @Override
+    public String getValue()
+    {
+        return (String) value;
     }
 }

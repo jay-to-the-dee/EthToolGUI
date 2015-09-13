@@ -16,12 +16,17 @@
  */
 package model.property;
 
+import java.util.*;
+import java.util.Map.Entry;
+
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public abstract class SingleEnumProperty extends Property
 {
+    EnumMap enumToStrings;
+
     public SingleEnumProperty(String propertyName, boolean readOnly)
     {
         super(propertyName, readOnly);
@@ -30,6 +35,26 @@ public abstract class SingleEnumProperty extends Property
     @Override
     public String getValue()
     {
-        return (String) value;
+        return (String) enumToStrings.get(value);
+    }
+
+    public Collection getAllPossibleValues()
+    {
+        return enumToStrings.values();
+    }
+
+    public Enum convertStringToEnumValue(String value)
+    {
+        Iterator iterator = enumToStrings.entrySet().iterator();
+        while (iterator.hasNext())
+        {
+            Entry property = (Entry) iterator.next();
+            String entryValue = (String) property.getValue();
+            if (value.equals(entryValue))
+            {
+                return (Enum) property.getKey();
+            }
+        }
+        return null;
     }
 }

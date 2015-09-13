@@ -16,16 +16,33 @@
  */
 package model.property;
 
+import java.util.EnumMap;
+
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class Port extends SingleEnumProperty
 {
-    public Port(String value)
+    public enum PortEnum
     {
         //Twisted Pair, AUI, BNC, MII, FIBRE, Direct Attach Copper, None, Other, Unknown! (%i)
+        TWISTED_PAIR, AUI, BNC, MII, FIBRE, DIRECT_ATTACH_COPPER, NONE, OTHER, UNKNOWN
+    }
+
+    public Port(String value)
+    {
         super("Port", true);
-        this.value = value;
+        enumToStrings = new EnumMap(PortEnum.class);
+        enumToStrings.put(PortEnum.TWISTED_PAIR, "Twisted Pair");
+        enumToStrings.put(PortEnum.AUI, "AUI");
+        enumToStrings.put(PortEnum.BNC, "BNC");
+        enumToStrings.put(PortEnum.MII, "MII");
+        enumToStrings.put(PortEnum.FIBRE, "FIBRE");
+        enumToStrings.put(PortEnum.DIRECT_ATTACH_COPPER, "Direct Attach Copper");
+        enumToStrings.put(PortEnum.NONE, "None");
+        enumToStrings.put(PortEnum.OTHER, "Other");
+        enumToStrings.put(PortEnum.UNKNOWN, "Unknown!");
+        this.value = convertStringToEnumValue(value);
     }
 }

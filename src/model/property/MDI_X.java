@@ -16,16 +16,30 @@
  */
 package model.property;
 
+import java.util.EnumMap;
+
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class MDI_X extends SingleEnumProperty
 {
-    public MDI_X(String value)
+    public enum MDI_XEnum
     {
         //off, on, Unknown ? (auto)
+        OFF, ON, UNKNOWN, OFF_AUTO, ON_AUTO, UNKNOWN_AUTO
+    }
+
+    public MDI_X(String value)
+    {
         super("MDI-X", true);
-        this.value = value;
+        enumToStrings = new EnumMap(MDI_XEnum.class);
+        enumToStrings.put(MDI_XEnum.OFF, "off");
+        enumToStrings.put(MDI_XEnum.ON, "on");
+        enumToStrings.put(MDI_XEnum.UNKNOWN, "Unknown");
+        enumToStrings.put(MDI_XEnum.OFF_AUTO, "off (auto)");
+        enumToStrings.put(MDI_XEnum.ON_AUTO, "on (auto)");
+        enumToStrings.put(MDI_XEnum.UNKNOWN_AUTO, "Unknown (auto)");
+        this.value = convertStringToEnumValue(value);
     }
 }

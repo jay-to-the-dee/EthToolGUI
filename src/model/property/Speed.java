@@ -16,15 +16,29 @@
  */
 package model.property;
 
+import java.util.EnumMap;
+
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class Speed extends SingleEnumProperty
 {
+    public enum SpeedEnum
+    {
+        SPEED_10, SPEED_100, SPEED_1000, SPEED_2500, SPEED_10000, SPEED_UNKNOWN
+    }
+
     public Speed(String value)
     {
         super("Speed", true);
-        this.value = value;
+        enumToStrings = new EnumMap(SpeedEnum.class);
+        enumToStrings.put(SpeedEnum.SPEED_10, "10Mb/s");
+        enumToStrings.put(SpeedEnum.SPEED_100, "100Mb/s");
+        enumToStrings.put(SpeedEnum.SPEED_1000, "1000Mb/s");
+        enumToStrings.put(SpeedEnum.SPEED_2500, "2500Mb/s");
+        enumToStrings.put(SpeedEnum.SPEED_10000, "10000Mb/s");
+        enumToStrings.put(SpeedEnum.SPEED_UNKNOWN, "Unknown!");
+        this.value = convertStringToEnumValue(value);
     }
 }

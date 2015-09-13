@@ -16,16 +16,26 @@
  */
 package model.property;
 
+import java.util.EnumMap;
+
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class Transceiver extends SingleEnumProperty
 {
+    public enum TransceiverEnum
+    {
+        INTERNAL, EXTERNAL, UNKNOWN
+    }
+
     public Transceiver(String value)
     {
-        //internal, external, Unknown!
         super("Transceiver", true);
-        this.value = value;
+        enumToStrings = new EnumMap(TransceiverEnum.class);
+        enumToStrings.put(TransceiverEnum.INTERNAL, "internal");
+        enumToStrings.put(TransceiverEnum.EXTERNAL, "external");
+        enumToStrings.put(TransceiverEnum.UNKNOWN, "Unknown!");       
+        this.value = convertStringToEnumValue(value);
     }
 }

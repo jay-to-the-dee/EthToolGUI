@@ -36,7 +36,7 @@ public class DeviceInformationTable extends JPanel
         for (Property property : interfaceDevice.getProperties())
         {
             this.add(new JLabel(property.getPropertyName()));
-
+            
             if (property.getValue() instanceof Boolean)
             {
                 JCheckBox newPropertyValueCheckBox;
@@ -52,9 +52,9 @@ public class DeviceInformationTable extends JPanel
                 IntegerProperty integerProperty = (IntegerProperty) property;
 
                 SpinnerModel sm = new SpinnerNumberModel(
-                        (int) integerProperty.getValue(), 
-                        integerProperty.getMinIntValue(), 
-                        integerProperty.getMaxIntValue(), 
+                        (int) integerProperty.getValue(),
+                        integerProperty.getMinIntValue(),
+                        integerProperty.getMaxIntValue(),
                         1);
                 newPropertyValueSpinner = new JSpinner(sm);
 
@@ -69,8 +69,6 @@ public class DeviceInformationTable extends JPanel
 
                 this.add(newPropertyValueTextField);
             }
-
         }
     }
-
 }

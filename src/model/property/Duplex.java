@@ -16,16 +16,27 @@
  */
 package model.property;
 
+import java.util.EnumMap;
+
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class Duplex extends SingleEnumProperty
 {
-    public Duplex(String value)
+    public enum DuplexEnum
     {
         //Half, Full, Unknown! (%i)
+        HALF, FULL, UNKNOWN
+    }
+
+    public Duplex(String value)
+    {
         super("Duplex", true);
-        this.value = value;
+        enumToStrings = new EnumMap(DuplexEnum.class);
+        enumToStrings.put(DuplexEnum.HALF, "Half");
+        enumToStrings.put(DuplexEnum.FULL, "Full");
+        enumToStrings.put(DuplexEnum.UNKNOWN, "Unknown!");
+        this.value = convertStringToEnumValue(value);
     }
 }

@@ -16,28 +16,24 @@
  */
 package model.property;
 
-import java.util.EnumMap;
+import java.util.*;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportedPauseFrameUse extends SingleEnumProperty
+public abstract class MultiEnumProperty extends Property
 {
-    public enum SupportedPauseFrameUseEnum
+    EnumMap enumToStrings;
+
+    public MultiEnumProperty(String propertyName, boolean readOnly)
     {
-        //Can be (Symmetric) ? Receive-only, Transmit-only or No
-        SYMMETRIC, RECEIVE_ONLY, TRANSMIT_ONLY, NO
+        super(propertyName, readOnly);
     }
 
-    public SupportedPauseFrameUse(String value)
+    @Override
+    public EnumSet getValue()
     {
-        super("Supported pause frame use", true);
-        enumToStrings = new EnumMap(SupportedPauseFrameUseEnum.class);
-        enumToStrings.put(SupportedPauseFrameUseEnum.SYMMETRIC, "Symmetric");
-        enumToStrings.put(SupportedPauseFrameUseEnum.RECEIVE_ONLY, "Receive-only");
-        enumToStrings.put(SupportedPauseFrameUseEnum.TRANSMIT_ONLY, "Transmit-only");
-        enumToStrings.put(SupportedPauseFrameUseEnum.NO, "No");
-        this.value = convertStringToEnumValue(value);
+        return (EnumSet) enumToStrings.get(value);
     }
 }

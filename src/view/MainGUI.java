@@ -23,6 +23,7 @@ import model.InterfaceHandle;
 
 /**
  * Main GUI screen that controls all the programs panels
+ *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class MainGUI extends JFrame
@@ -46,7 +47,7 @@ public class MainGUI extends JFrame
         currentlyShownInterfaceDevice = new InterfaceHandle(defaultDevice);
         Parser parser = new Parser(currentlyShownInterfaceDevice);
         parser.executeEthtoolAndParse();
-        
+
         deviceInformation = new DeviceInformationTable(currentlyShownInterfaceDevice);
         panel.add(deviceInformation, BorderLayout.CENTER);
 

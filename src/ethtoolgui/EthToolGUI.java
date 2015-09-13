@@ -16,8 +16,7 @@
  */
 package ethtoolgui;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 
 /**
  * A GUI interface to the Linux `ethtool` command
@@ -27,7 +26,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class EthToolGUI
 {
     /**
-     * @param args the command line arguments - perhaps device name should be accepted in future?
+     * @param args the command line arguments - perhaps device name should be
+     * accepted in future?
      */
     public static void main(String[] args)
     {

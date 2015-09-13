@@ -16,9 +16,9 @@
  */
 package controller;
 
-import model.property.*;
 import java.io.*;
 import model.InterfaceHandle;
+import model.property.*;
 import model.property.IntegerProperty.ValueOutOfBoundsException;
 
 /**

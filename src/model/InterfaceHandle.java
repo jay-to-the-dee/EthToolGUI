@@ -21,6 +21,7 @@ import model.property.Property;
 
 /**
  * This handle represents a Linux Ethernet interface e.g. 'eth0'
+ *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
 public class InterfaceHandle
@@ -43,10 +44,10 @@ public class InterfaceHandle
     {
         return properties;
     }
-    
+
     public void addNewProperty(Property property)
     {
         properties.add(property);
     }
-    
+
 }

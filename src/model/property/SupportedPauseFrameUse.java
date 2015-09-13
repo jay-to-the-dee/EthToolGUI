@@ -29,7 +29,7 @@ public class SupportedPauseFrameUse extends SingleEnumProperty
         //Can be Symmetric, Receive-only, Transmit-only or No
         SYMMETRIC, RECEIVE_ONLY, TRANSMIT_ONLY, NO
     }
-    
+
     public SupportedPauseFrameUse(String value)
     {
         super("Supported pause frame use", true);

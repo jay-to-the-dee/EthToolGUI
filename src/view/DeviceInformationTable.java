@@ -36,7 +36,7 @@ public class DeviceInformationTable extends JPanel
         for (Property property : interfaceDevice.getProperties())
         {
             this.add(new JLabel(property.getPropertyName()));
-            
+
             if (property.getValue() instanceof Boolean)
             {
                 JCheckBox newPropertyValueCheckBox;

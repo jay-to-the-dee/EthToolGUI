@@ -35,7 +35,7 @@ public class Transceiver extends SingleEnumProperty
         enumToStrings = new EnumMap(TransceiverEnum.class);
         enumToStrings.put(TransceiverEnum.INTERNAL, "internal");
         enumToStrings.put(TransceiverEnum.EXTERNAL, "external");
-        enumToStrings.put(TransceiverEnum.UNKNOWN, "Unknown!");       
+        enumToStrings.put(TransceiverEnum.UNKNOWN, "Unknown!");
         this.value = convertStringToEnumValue(value);
     }
 }

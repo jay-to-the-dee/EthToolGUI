@@ -28,9 +28,10 @@ import model.InterfaceHandle;
  */
 public class MainGUI extends JFrame
 {
-    public static final String defaultDevice = "eth0"; //TODO: Remove after GUI implentation
+    public String currentDevice;
 
     private final Container panel;
+    private TopToolbar topToolbar;
     private DeviceInformationTable deviceInformation;
 
     private InterfaceHandle currentlyShownInterfaceDevice;
@@ -44,15 +45,31 @@ public class MainGUI extends JFrame
         panel = this.getContentPane();
         panel.setLayout(new BorderLayout());
 
-        currentlyShownInterfaceDevice = new InterfaceHandle(defaultDevice);
+        topToolbar = new TopToolbar(this);
+        panel.add(topToolbar, BorderLayout.PAGE_START);
+
+        addDeviceInformationTable();
+
+        this.setContentPane(panel);
+        this.pack();
+        this.setVisible(true);
+    }
+
+    public void refreshTable()
+    {
+        panel.remove(deviceInformation);
+        addDeviceInformationTable();
+        panel.revalidate();
+    }
+
+    private void addDeviceInformationTable()
+    {
+        currentDevice = (String) topToolbar.getDeviceSelectionComboBox().getSelectedItem();
+        currentlyShownInterfaceDevice = new InterfaceHandle(currentDevice);
         Parser parser = new Parser(currentlyShownInterfaceDevice);
         parser.executeEthtoolAndParse();
 
         deviceInformation = new DeviceInformationTable(currentlyShownInterfaceDevice);
         panel.add(deviceInformation, BorderLayout.CENTER);
-
-        this.setContentPane(panel);
-        this.pack();
-        this.setVisible(true);
     }
 }

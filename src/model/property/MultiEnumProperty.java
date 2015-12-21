@@ -17,6 +17,7 @@
 package model.property;
 
 import java.util.*;
+import model.property.AbstractLinkModes.LinkModesEnum;
 
 /**
  *
@@ -34,6 +35,43 @@ public abstract class MultiEnumProperty extends Property
     @Override
     public EnumSet getValue()
     {
-        return (EnumSet) enumToStrings.get(value);
+        return (EnumSet) value;
+    }
+
+    @Override
+    public String toString()
+    {
+        return value.toString();
+    }
+
+    public Collection getAllPossibleValues()
+    {
+        return enumToStrings.values();
+    }
+
+    public Enum convertStringToEnumValue(String value)
+    {
+        Iterator iterator = enumToStrings.entrySet().iterator();
+        while (iterator.hasNext())
+        {
+            Map.Entry property = (Map.Entry) iterator.next();
+            String entryValue = (String) property.getValue();
+            if (value.equals(entryValue))
+            {
+                return (Enum) property.getKey();
+            }
+        }
+        return null;
+    }
+
+    public EnumSet convertStringSetToEnumValues(Set<String> values)
+    {
+        EnumSet enumSet = EnumSet.noneOf(LinkModesEnum.class); //TODO: Make generic
+
+        for (String item : values)
+        {
+            enumSet.add(convertStringToEnumValue(item));
+        }
+        return enumSet;
     }
 }

@@ -17,9 +17,10 @@
 package controller;
 
 import java.io.*;
+import java.util.*;
 import model.InterfaceHandle;
-import model.property.*;
 import model.property.IntegerProperty.ValueOutOfBoundsException;
+import model.property.*;
 
 /**
  *
@@ -50,9 +51,13 @@ public class Parser
             {
                 try
                 {
-                    if (line.startsWith("\tSupported link modes:"))
+                    if (line.startsWith("\tAdvertised link modes:"))
                     {
-                        //TODO: Implement multiline read
+                        interfaceHandle.addNewProperty(new AdvertisedLinkModes(ExtractMultiLineRead(line, buf)));
+                    }
+                    else if (line.startsWith("\tSupported link modes:"))
+                    {
+                        interfaceHandle.addNewProperty(new SupportedLinkModes(ExtractMultiLineRead(line, buf)));
                     }
                     else if (line.startsWith("\tSupported pause frame use:"))
                     {
@@ -165,5 +170,40 @@ public class Parser
         {
             throw new ParseFailureException(line);
         }
+    }
+
+    private Set<String> SplitStringBySpaces(String line) throws ParseFailureException
+    {
+        try
+        {
+            String[] splited = line.split("\\s+");
+            return new HashSet<>(Arrays.asList(splited));
+        }
+        catch (Exception ex) //Just in case we get any NullPointerExceptions or anything
+        {
+            throw new ParseFailureException(line);
+        }
+    }
+
+    private Set<String> ExtractMultiLineRead(String line, BufferedReader buf) throws ParseFailureException, IOException
+    {
+        Set<String> extractedStrings = new HashSet();
+
+        boolean firstLoop = false; // We already have our first line for sure, so we need to keep this state
+        do
+        {
+            if (firstLoop && line.contains(":"))
+            {
+                break;
+            }
+            firstLoop = true;
+            buf.mark(0);        //Set our reset point in stream
+            String colonExtract = ExtractEndOfStringAfterColons(line).replaceAll("^\\s+", "");
+            extractedStrings.addAll(SplitStringBySpaces(colonExtract));
+        }
+        while ((line = buf.readLine()) != null);
+
+        buf.reset();
+        return extractedStrings;
     }
 }

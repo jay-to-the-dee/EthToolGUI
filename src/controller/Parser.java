@@ -48,136 +48,70 @@ public class Parser
 
             while ((line = buf.readLine()) != null)
             {
-                if (line.startsWith("\tSupported pause frame use:"))
+                try
                 {
-                    try
+                    if (line.startsWith("\tSupported link modes:"))
+                    {
+                        //TODO: Implement multiline read
+                    }
+                    else if (line.startsWith("\tSupported pause frame use:"))
                     {
                         interfaceHandle.addNewProperty(new SupportedPauseFrameUse(ExtractEndOfStringAfterColons(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tSupports auto-negotiation:"))
-                {
-                    try
+                    else if (line.startsWith("\tSupports auto-negotiation:"))
                     {
                         interfaceHandle.addNewProperty(new SupportsAutoNegotiation(StringToBoolean(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                if (line.startsWith("\tAdvertised auto-negotiation:"))
-                {
-                    try
+                    if (line.startsWith("\tAdvertised auto-negotiation:"))
                     {
                         interfaceHandle.addNewProperty(new AdvertisedAutoNegotiation(StringToBoolean(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tSpeed:"))
-                {
-                    try
+                    else if (line.startsWith("\tSpeed:"))
                     {
                         interfaceHandle.addNewProperty(new Speed(ExtractEndOfStringAfterColons(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tDuplex:"))
-                {
-                    try
+                    else if (line.startsWith("\tDuplex:"))
                     {
                         interfaceHandle.addNewProperty(new Duplex(ExtractEndOfStringAfterColons(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tPort:"))
-                {
-                    try
+                    else if (line.startsWith("\tPort:"))
                     {
                         interfaceHandle.addNewProperty(new Port(ExtractEndOfStringAfterColons(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tPHYAD:"))
-                {
-                    try
+                    else if (line.startsWith("\tPHYAD:"))
                     {
                         interfaceHandle.addNewProperty(new PHYAD(ExtractUnsignedIntegerValue(line)));
                     }
-                    catch (ParseFailureException | ValueOutOfBoundsException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tAuto-negotiation:"))
-                {
-                    try
+                    else if (line.startsWith("\tAuto-negotiation:"))
                     {
                         interfaceHandle.addNewProperty(new AutoNegotiation(StringToBoolean(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tMDI-X:"))
-                {
-                    try
+                    else if (line.startsWith("\tMDI-X:"))
                     {
                         interfaceHandle.addNewProperty(new MDI_X(ExtractEndOfStringAfterColons(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tCurrent message level:"))
-                {
-                    try
+                    else if (line.startsWith("\tCurrent message level:"))
                     {
                         interfaceHandle.addNewProperty(new CurrentMessageLevel(ExtractEndOfStringAfterColons(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
-                }
 
-                else if (line.startsWith("\tLink detected:"))
-                {
-                    try
+                    else if (line.startsWith("\tLink detected:"))
                     {
                         interfaceHandle.addNewProperty(new LinkDetected(StringToBoolean(line)));
                     }
-                    catch (ParseFailureException ex)
-                    {
-                        //Do nothing and passively accept
-                    }
+                }
+                catch (ParseFailureException | ValueOutOfBoundsException ex)
+                {
+                    //Do nothing and passively accept
                 }
             }
 

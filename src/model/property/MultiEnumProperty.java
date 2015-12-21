@@ -41,7 +41,17 @@ public abstract class MultiEnumProperty extends Property
     @Override
     public String toString()
     {
-        return value.toString();
+        String string = "";
+        for (Iterator it = ((EnumSet) value).iterator(); it.hasNext();)
+        {
+            Object item = it.next();
+            string += enumToStrings.get(item);
+            if (it.hasNext())
+            {
+                string += ", ";
+            }
+        }
+        return string;
     }
 
     public Collection getAllPossibleValues()

@@ -17,7 +17,10 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import model.InterfaceHandle;
 import model.property.*;
 
@@ -37,7 +40,28 @@ public class DeviceInformationTable extends JPanel
         {
             this.add(new JLabel(property.getPropertyName()));
 
-            if (property.getValue() instanceof Boolean)
+            if (property instanceof SingleEnumProperty)
+            {
+                JComboBox newPropertyValueComboBox;
+                SingleEnumProperty singleEnumProperty = (SingleEnumProperty) property;
+
+                newPropertyValueComboBox = new JComboBox(singleEnumProperty.getAllPossibleValues().toArray());
+                newPropertyValueComboBox.setSelectedItem(singleEnumProperty.getValue());
+                if (property.isReadOnly())
+                {
+                    newPropertyValueComboBox.addActionListener(new ActionListener()
+                    { //This ActionListener stops other items being selected when value read-only
+                        @Override
+                        public void actionPerformed(ActionEvent e)
+                        {
+                            newPropertyValueComboBox.setSelectedItem(singleEnumProperty.getValue());
+                        }
+                    });
+                }
+
+                this.add(newPropertyValueComboBox);
+            }
+            else if (property.getValue() instanceof Boolean)
             {
                 JCheckBox newPropertyValueCheckBox;
                 newPropertyValueCheckBox = new JCheckBox();

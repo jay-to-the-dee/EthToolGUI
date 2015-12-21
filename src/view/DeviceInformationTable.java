@@ -16,11 +16,9 @@
  */
 package view;
 
-import java.awt.*;
+import java.awt.GridLayout;
 import java.awt.event.*;
-import java.util.*;
 import javax.swing.*;
-import javax.swing.event.ListDataListener;
 import model.InterfaceHandle;
 import model.property.*;
 
@@ -46,7 +44,7 @@ public class DeviceInformationTable extends JPanel
                 SingleEnumProperty singleEnumProperty = (SingleEnumProperty) property;
 
                 newPropertyValueComboBox = new JComboBox(singleEnumProperty.getAllPossibleValues().toArray());
-                newPropertyValueComboBox.setSelectedItem(singleEnumProperty.getValue());
+                newPropertyValueComboBox.setSelectedItem(singleEnumProperty.toString());
                 if (property.isReadOnly())
                 {
                     newPropertyValueComboBox.addActionListener(new ActionListener()
@@ -54,7 +52,7 @@ public class DeviceInformationTable extends JPanel
                         @Override
                         public void actionPerformed(ActionEvent e)
                         {
-                            newPropertyValueComboBox.setSelectedItem(singleEnumProperty.getValue());
+                            newPropertyValueComboBox.setSelectedItem(singleEnumProperty.toString());
                         }
                     });
                 }

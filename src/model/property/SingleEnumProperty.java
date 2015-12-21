@@ -33,9 +33,15 @@ public abstract class SingleEnumProperty extends Property
     }
 
     @Override
-    public String getValue()
+    public String toString()
     {
         return (String) enumToStrings.get(value);
+    }
+
+    @Override
+    public Enum getValue()
+    {
+        return (Enum) value;
     }
 
     public Collection getAllPossibleValues()

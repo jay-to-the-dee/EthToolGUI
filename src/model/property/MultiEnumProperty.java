@@ -74,6 +74,11 @@ public abstract class MultiEnumProperty extends Property
         return null;
     }
 
+    public String convertEnumValueToString(Enum value)
+    {
+        return (String) enumToStrings.get(value);
+    }
+
     public EnumSet convertStringSetToEnumValues(Set<String> values)
     {
         EnumSet enumSet = EnumSet.noneOf(LinkModesEnum.class); //TODO: Make generic

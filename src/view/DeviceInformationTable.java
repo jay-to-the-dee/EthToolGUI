@@ -18,6 +18,7 @@ package view;
 
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 import model.InterfaceHandle;
 import model.property.*;
@@ -31,14 +32,43 @@ public class DeviceInformationTable extends JPanel
 {
     public DeviceInformationTable(InterfaceHandle interfaceDevice)
     {
-
         this.setLayout(new GridLayout(0, 2));
 
         for (Property property : interfaceDevice.getProperties())
         {
             this.add(new JLabel(property.getPropertyName()));
 
-            if (property instanceof SingleEnumProperty)
+            if (property instanceof MultiEnumProperty)
+            {
+                MultiEnumProperty multiEnumProperty = (MultiEnumProperty) property;
+                EnumSet value = multiEnumProperty.getValue();
+
+                for (Iterator it = value.iterator(); it.hasNext();)
+                {
+                    Object item = it.next();
+                    Enum enumItem = (Enum) item;
+
+                    if (multiEnumProperty.isReadOnly())
+                    {
+                        JLabel itemLabel = new JLabel(multiEnumProperty.convertEnumValueToString(enumItem));
+                        this.add(itemLabel);
+                    }
+                    else
+                    {
+                        //TODO: Advertised link modes needs its options deriving from supported
+                        JCheckBox itemCheckBox = new JCheckBox(multiEnumProperty.convertEnumValueToString(enumItem), true);
+                        this.add(itemCheckBox);
+                    }
+
+                    if (it.hasNext())
+                    {
+                        this.add(new JPanel()); //Filler panel for alignment
+                    }
+                }
+
+            }
+
+            else if (property instanceof SingleEnumProperty)
             {
                 JComboBox newPropertyValueComboBox;
                 SingleEnumProperty singleEnumProperty = (SingleEnumProperty) property;

@@ -85,7 +85,15 @@ public abstract class MultiEnumProperty extends Property
 
         for (String item : values)
         {
-            enumSet.add(convertStringToEnumValue(item));
+            try
+            {
+                enumSet.add(convertStringToEnumValue(item));
+            }
+            catch (Exception e)
+            {
+                System.err.println(e.getMessage());
+                System.err.println("Could not lookup '" + item + "'!");
+            }
         }
         return enumSet;
     }

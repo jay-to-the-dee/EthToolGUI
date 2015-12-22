@@ -53,7 +53,10 @@ public class Parser
                 {
                     if (line.startsWith("\tAdvertised link modes:"))
                     {
-                        interfaceHandle.addNewProperty(new AdvertisedLinkModes(ExtractMultiLineRead(line, buf)));
+                        if (!ExtractEndOfStringAfterColons(line).replaceAll("^\\s+", "").equals("Not reported"))
+                        {
+                            interfaceHandle.addNewProperty(new AdvertisedLinkModes(ExtractMultiLineRead(line, buf)));
+                        }
                     }
                     else if (line.startsWith("\tSupported link modes:"))
                     {

@@ -17,12 +17,13 @@
 package model.property;
 
 import java.util.EnumMap;
+import model.property.Transceiver.TransceiverEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Transceiver extends SingleEnumProperty
+public class Transceiver extends SingleEnumProperty<TransceiverEnum>
 {
     public enum TransceiverEnum
     {

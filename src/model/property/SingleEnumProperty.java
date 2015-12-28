@@ -22,10 +22,11 @@ import java.util.Map.Entry;
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
+ * @param <TypeOfEnum> The Enum for this Property e.g. SpeedEnum, MDI_XEnum etc.
  */
-public abstract class SingleEnumProperty extends Property<Enum>
+public abstract class SingleEnumProperty<TypeOfEnum extends Enum<TypeOfEnum>> extends Property<TypeOfEnum>
 {
-    EnumMap enumToStrings;
+    EnumMap<TypeOfEnum, String> enumToStrings;
 
     public SingleEnumProperty(String propertyName, boolean readOnly)
     {
@@ -35,24 +36,22 @@ public abstract class SingleEnumProperty extends Property<Enum>
     @Override
     public String toString()
     {
-        return (String) enumToStrings.get(value);
+        return enumToStrings.get(value);
     }
 
-    public Collection getAllPossibleValues()
+    public Collection<String> getAllPossibleValues()
     {
         return enumToStrings.values();
     }
 
-    public Enum convertStringToEnumValue(String value)
+    public TypeOfEnum convertStringToEnumValue(String value)
     {
-        Iterator iterator = enumToStrings.entrySet().iterator();
-        while (iterator.hasNext())
+        for (Entry<TypeOfEnum, String> property : enumToStrings.entrySet())
         {
-            Entry property = (Entry) iterator.next();
-            String entryValue = (String) property.getValue();
+            String entryValue = property.getValue();
             if (value.equals(entryValue))
             {
-                return (Enum) property.getKey();
+                return property.getKey();
             }
         }
         return null;

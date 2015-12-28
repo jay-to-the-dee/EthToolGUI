@@ -17,12 +17,13 @@
 package model.property;
 
 import java.util.EnumMap;
+import model.property.Speed.SpeedEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Speed extends SingleEnumProperty
+public class Speed extends SingleEnumProperty<SpeedEnum>
 {
     public enum SpeedEnum
     {

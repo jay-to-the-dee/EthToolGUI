@@ -17,12 +17,13 @@
 package model.property;
 
 import java.util.EnumMap;
+import model.property.MDI_X.MDI_XEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class MDI_X extends SingleEnumProperty
+public class MDI_X extends SingleEnumProperty<MDI_XEnum>
 {
     public enum MDI_XEnum
     {

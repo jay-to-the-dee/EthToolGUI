@@ -17,12 +17,13 @@
 package model.property;
 
 import java.util.EnumMap;
+import model.property.Port.PortEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Port extends SingleEnumProperty
+public class Port extends SingleEnumProperty<PortEnum>
 {
     public enum PortEnum
     {

@@ -17,16 +17,17 @@
 package model.property;
 
 import java.util.EnumMap;
+import model.property.SupportedPauseFrameUse.SupportedPauseFrameUseEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class SupportedPauseFrameUse extends SingleEnumProperty
+public class SupportedPauseFrameUse extends SingleEnumProperty<SupportedPauseFrameUseEnum>
 {
     public enum SupportedPauseFrameUseEnum
     {
-        //Can be (Symmetric) ? Receive-only, Transmit-only or No
+        //TODO: Can be (Symmetric) ? Receive-only, Transmit-only or No
         SYMMETRIC, RECEIVE_ONLY, TRANSMIT_ONLY, NO
     }
 

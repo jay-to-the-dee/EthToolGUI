@@ -17,12 +17,13 @@
 package model.property;
 
 import java.util.EnumMap;
+import model.property.Duplex.DuplexEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public class Duplex extends SingleEnumProperty
+public class Duplex extends SingleEnumProperty<DuplexEnum>
 {
     public enum DuplexEnum
     {

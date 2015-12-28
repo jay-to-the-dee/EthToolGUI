@@ -70,8 +70,8 @@ public class DeviceInformationTable extends JPanel
 
             else if (property instanceof SingleEnumProperty)
             {
-                JComboBox newPropertyValueComboBox;
-                SingleEnumProperty singleEnumProperty = (SingleEnumProperty) property;
+                final JComboBox newPropertyValueComboBox;
+                final SingleEnumProperty singleEnumProperty = (SingleEnumProperty) property;
 
                 newPropertyValueComboBox = new JComboBox(singleEnumProperty.getAllPossibleValues().toArray());
                 newPropertyValueComboBox.setSelectedItem(singleEnumProperty.toString());

@@ -33,12 +33,6 @@ public abstract class MultiEnumProperty extends Property<EnumSet>
     }
 
     @Override
-    public EnumSet getValue()
-    {
-        return value;
-    }
-
-    @Override
     public String toString()
     {
         String string = "";

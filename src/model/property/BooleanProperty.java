@@ -26,10 +26,4 @@ public abstract class BooleanProperty extends Property<Boolean>
     {
         super(propertyName, readOnly);
     }
-
-    @Override
-    public Boolean getValue()
-    {
-        return value;
-    }
 }

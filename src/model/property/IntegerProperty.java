@@ -30,12 +30,6 @@ public abstract class IntegerProperty extends Property<Integer>
         super(propertyName, readOnly);
     }
 
-    @Override
-    public Integer getValue()
-    {
-        return value;
-    }
-
     public int getMaxIntValue()
     {
         return maxIntValue;

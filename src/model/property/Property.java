@@ -43,5 +43,8 @@ public abstract class Property<ValueType>
         return readOnly;
     }
 
-    public abstract Object getValue();
+    public ValueType getValue()
+    {
+        return value;
+    }
 }

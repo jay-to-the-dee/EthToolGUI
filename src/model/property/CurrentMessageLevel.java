@@ -52,10 +52,4 @@ public class CurrentMessageLevel extends Property<String>
         super("Current message level", false);
         this.value = value;
     }
-
-    @Override
-    public String getValue()
-    {
-        return value;
-    }
 }

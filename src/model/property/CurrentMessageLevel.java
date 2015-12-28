@@ -45,7 +45,7 @@ package model.property;
  //this.maxIntValue = (1 << 32) - 1; //Max value is 4,294,967,296 as this is a __u32 in C
 
  */
-public class CurrentMessageLevel extends Property
+public class CurrentMessageLevel extends Property<String>
 {
     public CurrentMessageLevel(String value)
     {
@@ -56,6 +56,6 @@ public class CurrentMessageLevel extends Property
     @Override
     public String getValue()
     {
-        return (String) value;
+        return value;
     }
 }

@@ -23,7 +23,7 @@ import model.property.AbstractLinkModes.LinkModesEnum;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public abstract class MultiEnumProperty extends Property
+public abstract class MultiEnumProperty extends Property<EnumSet>
 {
     EnumMap enumToStrings;
 
@@ -35,14 +35,14 @@ public abstract class MultiEnumProperty extends Property
     @Override
     public EnumSet getValue()
     {
-        return (EnumSet) value;
+        return value;
     }
 
     @Override
     public String toString()
     {
         String string = "";
-        for (Iterator it = ((EnumSet) value).iterator(); it.hasNext();)
+        for (Iterator it = value.iterator(); it.hasNext();)
         {
             Object item = it.next();
             string += enumToStrings.get(item);

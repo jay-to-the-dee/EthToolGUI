@@ -20,7 +20,7 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public abstract class IntegerProperty extends Property
+public abstract class IntegerProperty extends Property<Integer>
 {
     int maxIntValue;
     int minIntValue;
@@ -33,7 +33,7 @@ public abstract class IntegerProperty extends Property
     @Override
     public Integer getValue()
     {
-        return (Integer) value;
+        return value;
     }
 
     public int getMaxIntValue()

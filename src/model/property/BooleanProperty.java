@@ -20,7 +20,7 @@ package model.property;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public abstract class BooleanProperty extends Property
+public abstract class BooleanProperty extends Property<Boolean>
 {
     public BooleanProperty(String propertyName, boolean readOnly)
     {
@@ -30,6 +30,6 @@ public abstract class BooleanProperty extends Property
     @Override
     public Boolean getValue()
     {
-        return (Boolean) value;
+        return value;
     }
 }

@@ -23,7 +23,7 @@ import java.util.Map.Entry;
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public abstract class SingleEnumProperty extends Property
+public abstract class SingleEnumProperty extends Property<Enum>
 {
     EnumMap enumToStrings;
 
@@ -41,7 +41,7 @@ public abstract class SingleEnumProperty extends Property
     @Override
     public Enum getValue()
     {
-        return (Enum) value;
+        return value;
     }
 
     public Collection getAllPossibleValues()

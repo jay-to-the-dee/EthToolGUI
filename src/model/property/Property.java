@@ -19,12 +19,13 @@ package model.property;
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
+ * @param <ValueType> The type of data to be stored in this Property
  */
-public abstract class Property
+public abstract class Property<ValueType>
 {
     private final String propertyName;
     private final boolean readOnly;
-    Object value;
+    ValueType value;
 
     public Property(String propertyName, boolean readOnly)
     {

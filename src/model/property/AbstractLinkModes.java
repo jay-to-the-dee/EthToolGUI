@@ -17,12 +17,13 @@
 package model.property;
 
 import java.util.*;
+import model.property.AbstractLinkModes.LinkModesEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
  */
-public abstract class AbstractLinkModes extends MultiEnumProperty
+public abstract class AbstractLinkModes extends MultiEnumProperty<LinkModesEnum>
 {
     public enum LinkModesEnum
     {
@@ -31,7 +32,7 @@ public abstract class AbstractLinkModes extends MultiEnumProperty
 
     public AbstractLinkModes(String propertyName, boolean readOnly)
     {
-        super(propertyName, readOnly);
+        super(propertyName, readOnly, LinkModesEnum.class);
         enumToStrings = new EnumMap(LinkModesEnum.class);
         //Taken from line 521 onwards in ethtool.c
         enumToStrings.put(LinkModesEnum.LM_10baseT_Half, "10baseT/Half");

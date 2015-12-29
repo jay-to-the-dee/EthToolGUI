@@ -17,66 +17,60 @@
 package model.property;
 
 import java.util.*;
-import model.property.AbstractLinkModes.LinkModesEnum;
 
 /**
  *
  * @author jay-to-the-dee <jay-to-the-dee@users.noreply.github.com>
+ * @param <TypeOfEnum> The Enum for this Property e.g. SpeedEnum, MDI_XEnum etc.
  */
-public abstract class MultiEnumProperty extends Property<EnumSet>
+public abstract class MultiEnumProperty<TypeOfEnum extends Enum<TypeOfEnum>> extends Property<EnumSet<TypeOfEnum>>
 {
-    EnumMap enumToStrings;
+    EnumMap<TypeOfEnum, String> enumToStrings;
+    Class<TypeOfEnum> clazz;
 
-    public MultiEnumProperty(String propertyName, boolean readOnly)
+    public MultiEnumProperty(String propertyName, boolean readOnly, Class<TypeOfEnum> clazz)
     {
         super(propertyName, readOnly);
+        this.clazz = clazz;
     }
 
-    @Override
-    public String toString()
+//Test code - currently unmaintained
+//    @Override
+//    public String toString()
+//    {
+//        String string = "";
+//        for (Iterator it = value.iterator(); it.hasNext();)
+//        {
+//            Enum<TypeOfEnum> item = (Enum<TypeOfEnum>) it.next();
+//            string += enumToStrings.get(item);
+//            if (it.hasNext())
+//            {
+//                string += ", ";
+//            }
+//        }
+//        return string;
+//    }
+    public TypeOfEnum convertStringToEnumValue(String value)
     {
-        String string = "";
-        for (Iterator it = value.iterator(); it.hasNext();)
+        for (Map.Entry<TypeOfEnum, String> property : enumToStrings.entrySet())
         {
-            Object item = it.next();
-            string += enumToStrings.get(item);
-            if (it.hasNext())
-            {
-                string += ", ";
-            }
-        }
-        return string;
-    }
-
-    public Collection getAllPossibleValues()
-    {
-        return enumToStrings.values();
-    }
-
-    public Enum convertStringToEnumValue(String value)
-    {
-        Iterator iterator = enumToStrings.entrySet().iterator();
-        while (iterator.hasNext())
-        {
-            Map.Entry property = (Map.Entry) iterator.next();
-            String entryValue = (String) property.getValue();
+            String entryValue = property.getValue();
             if (value.equals(entryValue))
             {
-                return (Enum) property.getKey();
+                return property.getKey();
             }
         }
         return null;
     }
 
-    public String convertEnumValueToString(Enum value)
+    public String convertEnumValueToString(TypeOfEnum localValue)
     {
-        return (String) enumToStrings.get(value);
+        return enumToStrings.get(localValue);
     }
 
-    public EnumSet convertStringSetToEnumValues(Set<String> values)
+    public EnumSet<TypeOfEnum> convertStringSetToEnumValues(Set<String> values)
     {
-        EnumSet enumSet = EnumSet.noneOf(LinkModesEnum.class); //TODO: Make generic
-
+        EnumSet<TypeOfEnum> enumSet = EnumSet.<TypeOfEnum>noneOf(clazz);
         for (String item : values)
         {
             try

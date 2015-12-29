@@ -41,7 +41,7 @@ public class DeviceInformationTable extends JPanel
             if (property instanceof MultiEnumProperty)
             {
                 MultiEnumProperty multiEnumProperty = (MultiEnumProperty) property;
-                EnumSet value = multiEnumProperty.getValue();
+                EnumSet value = (EnumSet) multiEnumProperty.getValue();
 
                 for (Iterator it = value.iterator(); it.hasNext();)
                 {
